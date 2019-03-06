@@ -1,9 +1,10 @@
 import React from 'react';
 
-const TodoList = (props) => (
+const TodoList = props => (
   <ul>
-    <li>item 1</li>
-    <li>item 2</li>
+    {props.taskList.map(t => (
+      <li className={t.completed ? t.completed : 'incomplete'}>{t.taskName}</li>
+    ))}
   </ul>
 );
 

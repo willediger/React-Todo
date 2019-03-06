@@ -4,10 +4,10 @@ import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
 
-const Todo = (props) => (
+const Todo = props => (
   <>
-    <TodoList />
-    <TodoForm />
+    <TodoList taskList={props.taskList}/>
+    <TodoForm addTodo={props.addTodo}/>
   </>
 );
 
