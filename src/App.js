@@ -1,12 +1,25 @@
 import React from 'react';
 
-import Todo from './components/TodoComponents/Todo';
+import TodoList from './components/TodoComponents/TodoList';
+import TodoForm from './components/TodoComponents/TodoForm';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      taskList: []
+      taskList: [
+        // {
+        //   task: 'Organize Garage',
+        //   id: 1528817077286,
+        //   completed: false
+        // },
+        // {
+        //   task: 'Bake Cookies',
+        //   id: 1528817084358,
+        //   completed: false
+        // }
+
+      ]
     }
   }
 
@@ -20,11 +33,18 @@ class App extends React.Component {
     this.setState(prevState => ({taskList: [...prevState.taskList, task]}));
   }
 
-  clearCompletedTodos = e => {
-
+  toggleTodoCompletion = id => e => {
+    this.setState((prevState) => {
+      let taskList = prevState.taskList;
+      const idx = taskList.map(e => e.id).indexOf(id);
+      taskList[idx].completed = !taskList[idx].completed;
+      return {
+        taskList: taskList
+      }
+    });
   }
 
-  toggleTodoCompletion = e => {
+  clearCompletedTodos = e => {
 
   }
 
@@ -34,7 +54,19 @@ class App extends React.Component {
   render() {
     console.log(this.state.taskList);
     return (
-      <Todo addTodo={this.addTodo} clearCompletedTodos={this.clearCompletedTodos} taskList={this.state.taskList}/>
+      <>
+        <TodoForm 
+          addTodo={this.addTodo} 
+          clearCompletedTodos={this.clearCompletedTodos}
+          taskList={this.state.taskList}
+        />
+        <TodoList 
+          addTodo={this.addTodo} 
+          clearCompletedTodos={this.clearCompletedTodos}
+          taskList={this.state.taskList}
+          toggleTodoCompletion={this.toggleTodoCompletion}
+        />
+      </>
     );
   }
 }

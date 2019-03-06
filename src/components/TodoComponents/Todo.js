@@ -1,14 +1,13 @@
 import React from 'react';
-
-import TodoForm from './TodoForm';
-import TodoList from './TodoList';
-
+import './Todo.css';
 
 const Todo = props => (
-  <>
-    <TodoList taskList={props.taskList}/>
-    <TodoForm addTodo={props.addTodo}/>
-  </>
+  <li 
+    className={props.completed ? 'completed': ''} 
+    onClick={props.toggleTodoCompletion(props.id)}
+  >
+    {props.taskName}
+  </li>
 );
 
 
