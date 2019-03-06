@@ -3,10 +3,10 @@ import './Todo.css';
 
 const Todo = props => (
   <li 
-    className={props.completed ? 'completed': ''} 
-    onClick={props.toggleTodoCompletion(props.id)}
+    className={props.task.completed ? 'completed': ''} 
+    onClick={props.toggleTodoCompletion(props.task.id)}
   >
-    {props.taskName}
+    {props.task.taskName}
   </li>
 );
 

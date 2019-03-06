@@ -34,7 +34,7 @@ class App extends React.Component {
   }
 
   toggleTodoCompletion = id => e => {
-    this.setState((prevState) => {
+    this.setState(prevState => {
       let taskList = prevState.taskList;
       const idx = taskList.map(e => e.id).indexOf(id);
       taskList[idx].completed = !taskList[idx].completed;
@@ -45,7 +45,8 @@ class App extends React.Component {
   }
 
   clearCompletedTodos = e => {
-
+    e.preventDefault();
+    this.setState(prevState => ({taskList: prevState.taskList.filter(e => !e.completed)}));
   }
 
   // you will need a place to store your state in this component.
@@ -58,11 +59,8 @@ class App extends React.Component {
         <TodoForm 
           addTodo={this.addTodo} 
           clearCompletedTodos={this.clearCompletedTodos}
-          taskList={this.state.taskList}
         />
         <TodoList 
-          addTodo={this.addTodo} 
-          clearCompletedTodos={this.clearCompletedTodos}
           taskList={this.state.taskList}
           toggleTodoCompletion={this.toggleTodoCompletion}
         />
