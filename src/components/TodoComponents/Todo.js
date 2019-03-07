@@ -2,12 +2,12 @@ import React from 'react';
 import './Todo.css';
 
 const Todo = props => (
-  <li 
-    className={props.task.completed ? 'completed': ''} 
+  <div 
+    className={props.task.completed ? 'completed item': 'item'} 
     onClick={props.toggleTodoCompletion(props.task.id)}
   >
     {props.task.taskName}
-  </li>
+  </div>
 );
 
 

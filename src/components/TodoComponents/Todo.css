@@ -1,3 +1,13 @@
 .completed {
   text-decoration: line-through;
 }
+
+.ui.input, .ui.button {
+  height: 36px;
+  margin-right: 5px;
+}
+
+form {
+  display: flex;
+  align-items: flex-start;
+}

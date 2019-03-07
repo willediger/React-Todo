@@ -3,15 +3,17 @@ import Todo from './Todo';
 import './Todo.css';
 
 const TodoList = props => (
-  <ul>
-    {props.taskList.map(t => (
-      <Todo
-        task={t}
-        toggleTodoCompletion={props.toggleTodoCompletion}
-        key={t.id}
-      />
-    ))}
-  </ul>
+  <div className="ui segment">
+    <div className="ui relaxed divided list">
+      {props.taskList.map(t => (
+        <Todo
+          task={t}
+          toggleTodoCompletion={props.toggleTodoCompletion}
+          key={t.id}
+        />
+      ))}
+    </div>
+  </div>
 );
 
 
