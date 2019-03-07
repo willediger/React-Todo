@@ -4,6 +4,7 @@ import './App.css';
 
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
+import TodoSearch from './components/TodoComponents/TodoSearch';
 
 class App extends React.Component {
   constructor(props) {
@@ -26,7 +27,8 @@ class App extends React.Component {
     const task = {
       taskName: taskName,
       id: Date.now(),
-      completed: false
+      completed: false,
+      filtered: false
     }
     this.setState(prevState => {
       const newTaskList = [...prevState.taskList, task]
@@ -38,7 +40,7 @@ class App extends React.Component {
   toggleTodoCompletion = id => e => {
     this.setState(prevState => {
       let taskList = prevState.taskList;
-      const idx = taskList.map(e => e.id).indexOf(id);
+      const idx = taskList.map(el => el.id).indexOf(id);
       taskList[idx].completed = !taskList[idx].completed;
       return {
         taskList: taskList
@@ -50,8 +52,26 @@ class App extends React.Component {
   clearCompletedTodos = e => {
     e.preventDefault();
     this.setState(prevState => {
-      const updatedTaskList = prevState.taskList.filter(e => !e.completed);
+      const updatedTaskList = prevState.taskList.filter(el => !el.completed);
       localStorage.setItem('taskList', JSON.stringify(updatedTaskList));
+      return {taskList: updatedTaskList}
+    });
+  }
+
+  searchTodos = search => e => {
+    e.preventDefault();
+    this.setState(prevState => {
+      let taskList = prevState.taskList;
+      taskList.filter(el => !el.taskName.includes(search)).forEach(el => el.filtered = true)
+      return {taskList: taskList}
+    });
+  }
+
+  clearSearchFilter = e => {
+    e.preventDefault();
+    this.setState(prevState => {
+      const updatedTaskList = prevState.taskList;
+      updatedTaskList.forEach(el => el.filtered = false);
       return {taskList: updatedTaskList}
     });
   }
@@ -65,6 +85,10 @@ class App extends React.Component {
         <TodoForm 
           addTodo={this.addTodo} 
           clearCompletedTodos={this.clearCompletedTodos}
+        />
+        <TodoSearch
+          searchTodos={this.searchTodos}
+          clearSearchFilter={this.clearSearchFilter}
         />
         <TodoList 
           taskList={this.state.taskList}
