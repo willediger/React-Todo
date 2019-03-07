@@ -26,8 +26,11 @@ class App extends React.Component {
       id: Date.now(),
       completed: false
     }
-    this.setState(prevState => ({taskList: [...prevState.taskList, task]}));
-    localStorage.setItem('taskList', JSON.stringify(this.state.taskList));
+    this.setState(prevState => {
+      const newTaskList = [...prevState.taskList, task]
+      localStorage.setItem('taskList', JSON.stringify(newTaskList));
+      return {taskList: [...prevState.taskList, task]};
+    });
   }
 
   toggleTodoCompletion = id => e => {
