@@ -2,6 +2,10 @@
   text-decoration: line-through;
 }
 
+.ui.segment {
+  width: 462px;
+}
+
 .ui.list>.item.filtered {
   display: none;
 }
