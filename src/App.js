@@ -61,18 +61,31 @@ class App extends React.Component {
   searchTodos = search => e => {
     e.preventDefault();
     this.setState(prevState => {
-      let taskList = prevState.taskList;
-      taskList.filter(el => !el.taskName.includes(search)).forEach(el => el.filtered = true)
-      return {taskList: taskList}
+      return {
+        taskList: prevState.taskList.map(el => {
+          if (!el.taskName.includes(search)) {
+            return {
+              ...el,
+              filtered: true
+            }
+          }
+          return el;
+        })
+      }
     });
   }
 
   clearSearchFilter = e => {
     e.preventDefault();
     this.setState(prevState => {
-      const updatedTaskList = prevState.taskList;
-      updatedTaskList.forEach(el => el.filtered = false);
-      return {taskList: updatedTaskList}
+      return {
+        taskList: prevState.taskList.map(el => {
+          return {
+            ...el,
+            filtered: false
+          }
+        })
+      }
     });
   }
 
