@@ -4,7 +4,7 @@ import './Todo.css';
 
 const TodoList = props => (
   <div className="ui segment">
-    <div className="ui relaxed divided list">
+    <div className="ui relaxed list">
       {props.taskList.map(t => (
         <Todo
           task={t}

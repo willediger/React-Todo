@@ -35,13 +35,13 @@ class TodoForm extends React.Component {
         </div>
         <button 
           type="submit" 
-          className="ui button"
+          className="ui button first-button"
         >
           Add Todo
         </button>
         <button 
           type="button" 
-          className="ui button" 
+          className="ui button second-button" 
           onClick={this.props.clearCompletedTodos}
         >
           Clear Completed
